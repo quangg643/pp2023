@@ -1,70 +1,71 @@
-students = {} # Defined a dictionary to store student info
-courses = {} # Defined a dictionary to store courses info
-marks = {} # Defined a dictionary to store marks
+# define a dictionary to store student, marks and courses inforrmation 
+students = []
+marks = []
+courses = []
 
+def input_number_students():
+    return int(input("Enter number of students:"))
 
+def input_student_infor():
+    id = input("Enter student ID:")
+    name = input("Enter student name:")
+    dob = input("Enter student date of birth:")
+    students[student_id] = {"name": student_name, "dob": student_dob}
 
-# Function for the input of student info:
-def input_students():
-    n_students = int(input("Enter the number of students in the class:"))
-    for i in range(n_students):
-        students_id = input("Enter students id: ")
-        students_name = input("Enter students name: ")
-        students_DoB = input("Enter students date of birth: ")
-        students[students_id]= {'name': students_name, 'DoB': students_DoB}
+no_students = input_number_students()
+for i in range(no_students):
+    students += [input_student_infor()]
 
-# Function for the input of courses info:
-def input_courses():
-    n_courses = int(input("Enter the number of the courses: "))
-    for i in range(n_courses):
-        courses_id = input("Enter courses id: ")
-        courses_name = input("Enter courses name: ")
-        courses[courses_id]= {'name': courses_name}
+def input_number_courses():
+    return int(input("Enter number of courses:"))
 
-# Function to select a course and put in the marks for students:
+def input_courses_infor():
+    courses_id = input("Enter courses ID:")
+    courses_name = input("Enter courses name:")
+     courses[course_id] = {"name": course_name}
+    
+no_courses = input_number_courses()
+for i in range(no_courses):
+    courses += [input_courses_infor()]
+
 def input_marks():
-    courses_id = input("Enter the course id: ")
+    courses_id = input("Enter the courese ID:")
     if courses_id not in courses:
-        print("No courses found!")
+        print("Wrong courses ID")
         return
-    for students_id in students:
-        mark = int(input(f"Enter the mark for {students[students_id]['name']}: "))
-        if students_id not in marks:
-            marks[students_id] = {}
-        marks[students_id][courses_id] = mark
+    for id in students:
+        mark = int(input("Enter the mark for {students[id]['name]}:"))
+        if id not in marks:
+            marks[id] = {}
+        marks[id][courses_id] = mark
 
-# Defined function to list courses and students:
 def list_courses():
-    for courses_id in courses:
-        print(f"(courses_id: {courses[courses_id]['name']})")
+    for course_id in courses:
+        print(f"{course_id}: {courses[course_id]['name']}")
 
 def list_students():
-    for students_id in students:
-        print(f"(students_id: {students[students_id]['name']})")
+    for id in students:
+        print(f"{id}: {students[id]['name']}")
 
-# Function to show marks of given courses:
 def show_marks():
-    courses_id = input("Enter the courses id: ")
-    if courses_id not in courses:
-        print("No courses found!")
+    course_id = input("Enter the course ID: ")
+    if course_id not in courses:
+        print("Wrong course ID")
         return
-    for students_id in students:
-        if students_id in marks and courses_id in marks[students_id]:
-            print(f"(students_id: {students[students_id]['name']}: {marks[students_id][courses_id]}")
+    for id in students:
+        if id in marks and course_id in marks[id]:
+            print(f"{students[id]['name']}: {marks[id][course_id]}")
         else:
-            print(f"{students[students_id]['name']}: Not found")
+            print(f"{students[id]['name']}: N/A")
 
-# Main program to run:
-input_students()
-input_courses()
-
+#Main program
 while True:
-    print("Select: ")
-    print("1. Input marks of a course")
+    print("Select an option")
+    print("1. Input marks for a course")
     print("2. List courses")
-    print("3. List Students")
-    print("4. Show the student marks of the given courses")
-    print("5. End")
+    print("3. List students")
+    print("4. Show student marks for a given choice")
+    print("5. Quit")
     choice = input("Enter your choice: ")
     if choice == "1":
         input_marks()
@@ -77,4 +78,4 @@ while True:
     elif choice == "5":
         break
     else:
-        print("Invalid choice, sorry!")
+        print("Wrong choice, please try again!")
